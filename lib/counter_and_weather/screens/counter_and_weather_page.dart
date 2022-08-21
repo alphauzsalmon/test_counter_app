@@ -53,9 +53,10 @@ class CounterAndWeatherPage extends StatelessWidget {
                             },
                             child: const Icon(Icons.cloud)),
                         FloatingActionButton(
-                          onPressed: () => notifier.value = mode == ThemeMode.light
-                              ? ThemeMode.dark
-                              : ThemeMode.light,
+                          onPressed: () => notifier.value =
+                              mode == ThemeMode.light
+                                  ? ThemeMode.dark
+                                  : ThemeMode.light,
                           child: const Icon(Icons.draw),
                         )
                       ],
@@ -64,20 +65,28 @@ class CounterAndWeatherPage extends StatelessWidget {
                       children: [
                         state < 10
                             ? FloatingActionButton(
-                            onPressed: () {
-                              BlocProvider.of<CounterBloc>(context)
-                                  .add(IncrementCounterValue());
-                            },
-                            child: const Icon(Icons.add))
-                            : const SizedBox(height: 40,),
+                                onPressed: () {
+                                  BlocProvider.of<CounterBloc>(context).add(
+                                      mode == ThemeMode.light
+                                          ? IncrementCounterValue()
+                                          : DoubleIncrementCounterValue());
+                                },
+                                child: const Icon(Icons.add))
+                            : const SizedBox(
+                                height: 40,
+                              ),
                         state > 0
                             ? FloatingActionButton(
-                            onPressed: () {
-                              BlocProvider.of<CounterBloc>(context)
-                                  .add(DecrementCounterValue());
-                            },
-                            child: const Icon(Icons.minimize))
-                            : const SizedBox(height: 40,)
+                                onPressed: () {
+                                  BlocProvider.of<CounterBloc>(context).add(
+                                      mode == ThemeMode.light
+                                          ? DecrementCounterValue()
+                                          : DoubleDecrementCounterValue());
+                                },
+                                child: const Icon(Icons.minimize))
+                            : const SizedBox(
+                                height: 40,
+                              )
                       ],
                     )
                   ],
